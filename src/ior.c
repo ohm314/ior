@@ -776,6 +776,7 @@ static void DisplayUsage(char **argv)
                 " -W    checkWrite -- check read after write",
                 " -x    singleXferAttempt -- do not retry transfer if incomplete",
                 " -X N  reorderTasksRandomSeed -- random seed for -Z option",
+                " -y N  abortAfterIterations -- call system abort signal after N iterations",
                 " -Y    fsyncPerWrite -- perform fsync after each POSIX write",
                 " -z    randomOffset -- access is to random, not sequential, offsets within a file",
                 " -Z    reorderTasksRandom -- changes task ordering to random ordering for readback",
@@ -2040,6 +2041,13 @@ static void TestIoSys(IOR_test_t *test)
                 /* use repetition count for number of multiple files */
                 if (params->multiFile)
                         params->repCounter = rep;
+
+                /*
+                 * abort ior if behavior is requested and rep reached.
+                 */
+                if (params->abortAfterIterations != -1 && rep >= params->abortAfterIterations) {
+                  abort();
+                }
 
                 /*
                  * write the file(s), getting timing between I/O calls

@@ -152,6 +152,7 @@ typedef struct
     int randomSeed;                  /* random seed for write/read check */
     int incompressibleSeed;           /* random seed for incompressible file creation */
     int randomOffset;                /* access is to random offsets */
+    int abortAfterIterations;
     size_t memoryPerTask;            /* additional memory used per task */
     size_t memoryPerNode;            /* additional memory used per node */
     enum PACKET_TYPE dataPacketType;             /* The type of data packet.  */

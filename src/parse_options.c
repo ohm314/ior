@@ -271,6 +271,9 @@ void DecodeDirective(char *line, IOR_param_t *params)
         } else if (strcasecmp(option, "memoryPerNode") == 0) {
                 params->memoryPerNode = NodeMemoryStringToBytes(value);
                 params->memoryPerTask = 0;
+        } else if (strcasecmp(option, "abortAfterIterations") == 0) {
+                params->abortAfterIterations = atoi(value);
+                params->abortAfterIterations = 0;
         } else if (strcasecmp(option, "lustrestripecount") == 0) {
 #ifndef HAVE_LUSTRE_LUSTRE_USER_H
                 ERR("ior was not compiled with Lustre support");
@@ -450,7 +453,7 @@ IOR_test_t *ReadConfigScript(char *scriptName)
 IOR_test_t *ParseCommandLine(int argc, char **argv)
 {
         static const char *opts =
-          "a:A:b:BcCd:D:eEf:FgG:hHi:Ij:J:kKl:mM:nN:o:O:pPqQ:rRs:St:T:uU:vVwWxX:YzZ";
+          "a:A:b:BcCd:D:eEf:FgG:hHi:Ij:J:kKl:mM:nN:o:O:pPqQ:rRs:St:T:uU:vVwWxX:y:YzZ";
         int c, i;
         static IOR_test_t *tests = NULL;
 
@@ -629,6 +632,9 @@ IOR_test_t *ParseCommandLine(int argc, char **argv)
                         break;
                 case 'X':
                         initialTestParams.reorderTasksRandomSeed = atoi(optarg);
+                        break;
+                case 'y':
+                        initialTestParams.abortAfterIterations = atoi(optarg);
                         break;
                 case 'Y':
                         initialTestParams.fsyncPerWrite = TRUE;
