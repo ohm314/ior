@@ -224,6 +224,7 @@ void init_IOR_Param_t(IOR_param_t * p)
 
         p->beegfs_numTargets = -1;
         p->beegfs_chunkSize = -1;
+        p->abortAfterIterations = -1;
 }
 
 /**

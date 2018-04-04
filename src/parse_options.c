@@ -273,7 +273,6 @@ void DecodeDirective(char *line, IOR_param_t *params)
                 params->memoryPerTask = 0;
         } else if (strcasecmp(option, "abortAfterIterations") == 0) {
                 params->abortAfterIterations = atoi(value);
-                params->abortAfterIterations = 0;
         } else if (strcasecmp(option, "lustrestripecount") == 0) {
 #ifndef HAVE_LUSTRE_LUSTRE_USER_H
                 ERR("ior was not compiled with Lustre support");
